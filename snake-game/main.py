@@ -8,7 +8,7 @@ screen.setup(width=600, height=600)
 screen.bgcolor(51, 102, 0)
 screen.title("snake game")
 
-teste = Turtle
+teste = Turtle()
 
 bg_color_1 = Turtle("square")
 bg_color_1.color(64, 128, 0)
