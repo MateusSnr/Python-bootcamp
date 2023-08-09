@@ -1,11 +1,20 @@
 from turtle import Turtle
+ALIGNMENT = "center"
+FONT = ("Arial", 24, "normal")
 
-class Score(Turtle):
+class Scoreboard(Turtle):
     def __init__(self):
         super().__init__()
-        self.score_turtle = Turtle()
-        self.score_turtle.write("Home = ", False, align="center")
+        self.score = 0
+        self.penup()
+        self.goto(0, 250)
+        self.hideturtle()
+        self.update_scoreboard()
 
-    def add(self):
-        self.score_turtle.clear()
-        self.score_turtle.write("Home = 1", False, align="center")
+    def update_scoreboard(self):
+        self.write(f"Score: {self.score}", align=ALIGNMENT, font=FONT)
+
+    def increase_score(self):
+        self.clear()
+        self.score += 1
+        self.update_scoreboard()
