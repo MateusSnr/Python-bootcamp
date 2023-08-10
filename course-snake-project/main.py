@@ -3,6 +3,15 @@ from snake import Snake
 from food import Food
 from scoreboard import Scoreboard
 import time
+import pygame
+
+def play_music():
+    pygame.init()
+    pygame.mixer.music.load("Super-Mario.mp3")
+    pygame.mixer.music.play()
+    pygame.event.wait(1)
+
+play_music()
 
 screen = Screen()
 
@@ -32,5 +41,19 @@ while game_is_on:
     if snake.head.distance(food) < 15:
         food.refresh()
         score.increase_score()
+        snake.extend()
+
+    #Collision with wall
+    if snake.head.xcor() > 280 or snake.head.xcor() < -300 or snake.head.ycor() > 300 or snake.head.ycor() < -280:
+        game_is_on = False
+        score.game_over()
+
+    #Detect collision with tail
+    for segment in snake.segments:
+        if segment == snake.head:
+            pass
+        elif snake.head.distance(segment) < 10:
+            game_is_on = False
+            score.game_over()
 
 screen.exitonclick()
