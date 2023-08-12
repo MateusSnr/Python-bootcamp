@@ -5,8 +5,9 @@ from scoreboard import Scoreboard
 import time
 import pygame
 
+pygame.init()
+
 def play_music():
-    pygame.init()
     pygame.mixer.music.load("Super-Mario.mp3")
     pygame.mixer.music.play()
     pygame.event.wait(1)
@@ -37,6 +38,9 @@ while game_is_on:
     time.sleep(0.1)
     snake.move()
 
+    if not pygame.mixer.music.get_busy():
+        play_music()
+
     #Detect collision with the apple
     if snake.head.distance(food) < 15:
         food.refresh()
@@ -47,6 +51,7 @@ while game_is_on:
     if snake.head.xcor() > 280 or snake.head.xcor() < -300 or snake.head.ycor() > 300 or snake.head.ycor() < -280:
         game_is_on = False
         score.game_over()
+        pygame.mixer.music.stop()
 
     #Detect collision with tail
     for segment in snake.segments:
@@ -54,6 +59,7 @@ while game_is_on:
             pass
         elif snake.head.distance(segment) < 10:
             game_is_on = False
+            pygame.mixer.music.stop()
             score.game_over()
 
 screen.exitonclick()
