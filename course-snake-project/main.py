@@ -54,10 +54,8 @@ while game_is_on:
         pygame.mixer.music.stop()
 
     #Detect collision with tail
-    for segment in snake.segments:
-        if segment == snake.head:
-            pass
-        elif snake.head.distance(segment) < 10:
+    for segment in snake.segments[1:]:
+        if snake.head.distance(segment) < 10:
             game_is_on = False
             pygame.mixer.music.stop()
             score.game_over()
