@@ -14,7 +14,7 @@
 
 import pandas
 
-data = pandas.read_csv("weather_data.csv")
+#data = pandas.read_csv("weather_data.csv")
 
 #data_dict = data.to_dict()
 #print(data_dict)
@@ -56,14 +56,38 @@ data = pandas.read_csv("weather_data.csv")
 #monday_temp_F = monday_temp * 9/5 + 32
 #print(monday_temp_F)
 
+#data_dict = {
+#    "students": ["Ana", "Lebron", "Curry"],
+#    "scores": [50, 60,80]
+#}
+
+#data = pandas.DataFrame(data_dict)
+#data.to_csv("new_data.csv")
+#print(data)
+#counter = 0
+data = pandas.read_csv("2018_Central_Park_Squirrel_Census_-_Squirrel_Data_20231014.csv")
+gray_squirrels_list = len(data[data["Primary Fur Color"] == "Gray"])
+red_squirrels_list = len(data[data["Primary Fur Color"] == "Cinnamon"])
+black_squirrels_list = len(data[data["Primary Fur Color"] == "Black"])
+print(gray_squirrels_list)
+print(red_squirrels_list)
+print(black_squirrels_list)
+
 data_dict = {
-    "students": ["Ana", "Lebron", "Curry"],
-    "scores": [50, 60,80]
+    "Fur Color": ["Gray", "Cinnamon", "Black"],
+    "Count": [gray_squirrels_list, red_squirrels_list, black_squirrels_list]
 }
 
-data = pandas.DataFrame(data_dict)
-data.to_csv("new_data.csv")
-print(data)
+data_to_new_file = pandas.DataFrame(data_dict)
+data_to_new_file.to_csv("New_amount_of_each_color_squirrel.csv")
+
+#for c in squirrels_list:
+#    if c == "Gray":
+#       counter += 1
+
+#print(counter)
+
+
 
 
 
