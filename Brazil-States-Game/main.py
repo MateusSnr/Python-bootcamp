@@ -16,10 +16,11 @@ while len(guessed_states_list) < 26:
     answer_state = screen.textinput(title=f"{len(guessed_states_list)}/26 States Correct",
                                     prompt="What's another state's name ?")
     if answer_state == "Exit":
-        missing_states = []
-        for state in states_list:
-            if state not in guessed_states_list:
-                missing_states.append(state)
+        missing_states = [state for state in states_list if state not in guessed_states_list]
+        # missing_states = []
+        # for state in states_list:
+        #    if state not in guessed_states_list:
+        #        missing_states.append(state)
         new_data = pandas.DataFrame(missing_states)
         new_data.to_csv("Estados_a_serem_estudados.csv")
         break
