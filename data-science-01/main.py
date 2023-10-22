@@ -213,3 +213,69 @@ Para escolher uma amostra de
 four_with_replacement = random.choices(list(range(3)), k=4)
 print(four_with_replacement)
 """
+
+#Zip e desempacotamento de argumentos
+#Empacotando listas
+list1 = ['a', 'b', 'c', 'd']
+list2 = [1, 2, 3]
+list3 = list(zip(list1, list2))
+print(list3)
+#Se uma das listas tiver tamanho diferente, o zip para assim que uma delas terminar
+#Desempacotando listas
+letters, numbers = zip(*list3)
+print(letters, numbers)
+
+#Desempacotamento com função
+def add(a, b): return a + b
+# add([1, 2]) TypeError
+print(add(*[1, 2]))
+
+
+# Args e kwargs
+def doubler(f):
+    def g(x):
+        return 2 * f(x)
+
+    return g
+
+
+def soma(x):
+    return x + 1
+
+
+g = doubler(soma)
+print(g(3))
+print(g(-1))
+
+
+# Função que aceita argumentos arbitrários
+def magic(*args, **kwargs):
+    print("unnamed args: ", args)
+    print("keyword args: ", kwargs)
+
+
+magic(1, 2, key="word", key2="word2")
+
+
+# Uma função como essa acima funciona de outra maneira também, se você quiser usar uma lista (ou tupla) e dicionário para fornecer argumentos para uma função
+
+def other_way_magic(x=0, y=0, w=0, z=0):
+    return x + y + z + w
+
+x_y_list = [1, 2]
+z_dict = {"z": 3}
+print(other_way_magic(*x_y_list, **z_dict))
+
+def soma1(x, y):
+    return x + y
+
+g = doubler(soma)
+print(g(1))
+
+def doubler_correct(f):
+    def g(*args, **kwargs):
+        return 2 * f(*args, **kwargs)
+    return g
+
+g = doubler_correct(soma1)
+print(g(1, 2))
